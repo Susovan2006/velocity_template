@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+<html>
+<style>
+</style>
+<body>
+<div style="$bannerStyle">
+#if ($bannerImage.length()>0)
+<img src="cid:banner" border="0" width="512" height="120" alt="image" style="display: block;margin-left: auto;margin-right: auto;" />
+#end
+<div style="$bannerTextStyle">
+<p><b>$bannerText</b></p>
+</div>
+</div>
+<br>
+#foreach( $theTable in $tableList )
+ #if ($theTable.header.size()> 0)
+<p style="$theTable.tableDescriptionStyle">$theTable.tableDescription</p>
+<table border="1" style="display: block;margin-left: auto;margin-right: auto;">  
+   <thead>
+    <tr>
+     #foreach( $coloumn in $theTable.header )
+     <th bgcolor="$headerRowColor"> $coloumn</th> 
+     #end
+    </tr>
+   </thead>
+   <tbody>  
+   #set ($rowCount = 0)     
+   #foreach( $rowData in $theTable.data ) 
+    #set ($rowCount = $rowCount+1)         
+     <tr>
+        #foreach( $value in $rowData )
+          #if ($rowCount % 2 == 0)
+             <td bgcolor="$theTable.evenRowColor"> $value</td> 
+          #else
+             <td bgcolor="$theTable.oddRowColor"> $value</td>                
+          #end
+        #end
+    </tr> 
+   #end
+   </tbody>
+ </table>
+ <br/><br/> 
+ #end
+#end
+
+#if ($mailBodyContent.length()> 0)
+<div> $mailBodyContent </div>
+#end   
+
+<div style="$footerStyle">
+#if ($footerImage.length()>0)
+<img src="cid:footer" border="0" width="1366" height="120" alt="image" style="display: block;margin-left: auto;margin-right: auto;"  >
+#end
+<div style="$footerTextStyle">
+<p><b>$footerText</b></p>
+</div>
+</div>
+
+</body>
+</html>
